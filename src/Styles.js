@@ -10,6 +10,10 @@ const useStyles = makeStyles({
         width: '25%',
         height:'100%',
         backgroundColor: '#526722'
+    },
+    header:{
+        paddingLeft: '30%',
+        width: '100%'
     }
 })
 
