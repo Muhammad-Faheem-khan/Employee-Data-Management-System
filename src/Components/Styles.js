@@ -7,12 +7,12 @@ const useStyles = makeStyles({
         flexDirection: 'row',
         position: 'absolute',
         left: '0',
-        width: '25%',
+        width: '20%',
         height:'100%',
         backgroundColor: '#526722'
     },
     header:{
-        paddingLeft:'25%',
+        paddingLeft:'20%',
         width: '100%'
     },
     appbar: {
@@ -33,21 +33,21 @@ const useStyles = makeStyles({
 
     },
     pageheader: {
-        backgroundColor: '#fdfdff',
-    },
-    pageicon: {
-        display: 'inline-block',
-        padding: '1.5rem',
-        borderRadius: '12px'
+        backgroundColor: '#f1f1f1',
     },
     pagehead: {
         display: 'flex',
-        padding: '3rem',
-        marginBottom: '1.5rem',
+        padding: '2rem',
         color: '#3c44b1'
     },
+    pageicon: {
+        display: 'inline-block',
+        padding: '1rem',
+        borderRadius: '10px'
+    },
+   
     pagetitle: {
-        padding: '1.5rem'
+        padding: '1rem'
     }
 
 })

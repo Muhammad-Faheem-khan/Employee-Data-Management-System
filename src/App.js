@@ -1,10 +1,9 @@
 import { CssBaseline } from '@material-ui/core'
-import { PeopleOutlineTwoTone } from '@material-ui/icons'
 import React from 'react'
-import Header from './Header'
-import PageHeader from './PageHeader'
-import SideBar from './SideBar'
-import useStyles from './Styles'
+import Employee from './Components/EmployeeData/Employee'
+import Header from './Components/Header'
+import SideBar from './Components/SideBar'
+import useStyles from './Components/Styles'
 
 
 
@@ -16,10 +15,7 @@ const App = () => {
             <SideBar />
             <div className={classes.header}>
             <Header />
-            <PageHeader  pagetitle= 'Page Header'
-              pagedescription='Page description'
-              pageicon={<PeopleOutlineTwoTone fontSize='large'/>}
-            />
+            <Employee />
             </div>
             
             
