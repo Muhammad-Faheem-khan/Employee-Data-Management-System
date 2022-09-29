@@ -1,5 +1,6 @@
-import { FormControlLabel, Grid, RadioGroup, TextField, InputLabel,MenuItem, Radio, Select, FormControl, FormLabel } from '@material-ui/core'
-
+import { FormControlLabel, Grid, RadioGroup, TextField, InputLabel,MenuItem, Radio, 
+    Select, FormControl, FormLabel, FormGroup, Checkbox, Button } from '@material-ui/core'
+    import { format } from 'date-fns'
 import useStyles from './Styles'
 import useForm  from './useForm'
 
@@ -10,20 +11,26 @@ const initialData = {
     mobileNo: '',
     gender: 'male',
     departmentId: '',
-    hireDate: new Date(),
-    ispermanent: 'false'
+    hireDate: (format(new Date(), 'yyyy-MM-dd')),
+    ispermanent: false
 }
 
-const department = ['Web Development', 'SQA', 'HR','Management']
+const department = [{id:'web', depart: 'Web Development'},
+                    {id: 'sqa',depart: 'SQA'},
+                    {id:'hr', depart: 'HR'},
+                    {id:'mg', depart: 'Management'}]
+
+const genders = [{id: 'male', gender: 'Male'},
+                {id: 'female', gender: 'Female'},
+                {id: 'other', gender: 'Other'}]
 
 const EmployeeForm = () => {
     const classes = useStyles()
-    const {values, setvalues, handleInputData, handlegender} = useForm(initialData)
-    console.log(values)
-
+    const {values, setvalues, handleInputData, handleInputDate, handleInputCheckbox} = useForm(initialData)
+    
   return (
     <>
-        <form autoComplete='off'>
+        <form autoComplete='off' className={classes.employeeform}>
             <Grid container >
                 <Grid item xs ={6}>
                 <TextField className={classes.inputdata} 
@@ -50,10 +57,10 @@ const EmployeeForm = () => {
                 ></TextField>
 
                 <TextField className={classes.inputdata} 
-                name='Id'  
+                name='city'  
                 variant='outlined' 
-                label='ID' 
-                value={values.id}
+                label='City' 
+                value={values.city}
                 onChange={handleInputData}
                 ></TextField>
                 </Grid>
@@ -61,12 +68,12 @@ const EmployeeForm = () => {
                     <FormControl>
                         <FormLabel>Gender</FormLabel>
                             <RadioGroup row name='gender' value={values.gender} onChange={handleInputData}>
-                                <FormControlLabel value='male' label='Male' control={<Radio />}/>
-                                <FormControlLabel value='female' label='Female' control={<Radio />}/>
-                                <FormControlLabel value='other' label='Other' control={<Radio />}/>
+                            {genders.map((item)=>(
+                                <FormControlLabel key={item.id} value={item.id} label={item.gender} control={<Radio />}/>
+                            ))}
                             </RadioGroup>      
                     </FormControl>
-                    <FormControl fullWidth style={{marginTop: '10px'}}>
+                    <FormControl  style={{marginTop: '10px', width: '80%'}}>
                          <InputLabel>Department</InputLabel>
                          <Select
                          name='departmentId'
@@ -74,13 +81,37 @@ const EmployeeForm = () => {
                          label="Department"
                         onChange={handleInputData} >
                             {department.map((department)=>(
-                                <MenuItem value={department}>{department}</MenuItem>
+                                <MenuItem key={department.id} value={department.id}>{department.depart}</MenuItem>
                             ))}
-                            
                          </Select>
                     </FormControl>
+
+                    <form className={classes.dateContainer}>
+                        <TextField id='date'
+                        label= 'Date of Joining'
+                        type='date'
+                        fullWidth
+                        variant='outlined'
+                        defaultValue={values.hireDate}
+                        InputLabelProps={{
+                            shrink: true
+                        }} onChange={handleInputDate}
+                        >
+                        </TextField>
+                    </form>
+
+                    <FormGroup>
+                         <FormControlLabel control={<Checkbox name='ispermanent' checked={values.ispermanent}
+                          onChange={handleInputCheckbox}/>} label="Permanent Employee" />
+                    </FormGroup>
+
+                    <div className={classes.buttondiv}>
+                    <Button classes={classes.formButton} type='button' variant='outlined' >Reset</Button>
+                    <Button classes={classes.formButton} type='submit' variant='contained' color='primary'>Submit</Button>
+                </div>
                   
                 </Grid>
+                
             </Grid>
         </form>
     </>

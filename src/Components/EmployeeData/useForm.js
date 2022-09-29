@@ -13,12 +13,28 @@ console.log(initialData)
 
        })
     }
+    const handleInputCheckbox= e =>{
+      setvalues({
+        ...values,
+        ispermanent: e.target.checked
+      })
+    }
+    const handleInputDate=e=>{
+      setvalues({
+        ...values,
+        hireDate: e.target.value
+      })
+    }
+    
+    
     console.log(values)
 
   return {
     values,
     setvalues,
-    handleInputData
+    handleInputData,
+    handleInputCheckbox,
+    handleInputDate
   }
 }
 

@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     appbar: {
         backgroundColor : '#fff',
         transform: 'translateZ(0)',
-        padding: '5px 15px',
+        padding: '5px 5px',
         '& .MuiSvgIcon-root': {
                 marginRight: '8px'
         }
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     },
     pagehead: {
         display: 'flex',
-        padding: '2rem',
+        padding: '1.5rem',
         color: '#3c44b1'
     },
     pageicon: {
