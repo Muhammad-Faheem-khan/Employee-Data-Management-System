@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core";
-import { relativeTimeRounding } from "moment/moment";
 
 const useStyles = makeStyles({
     inputdata:{
@@ -16,7 +15,9 @@ const useStyles = makeStyles({
     },
    
     formButton: {
-        marginRight: '5px'
+        marginRight: '1rem',
+        marginTop: '2rem',
+        textTransform: 'none'
     }
 })
 

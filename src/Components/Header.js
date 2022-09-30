@@ -17,13 +17,13 @@ const Header = () => {
                          <Grid item sm></Grid>
                          <Grid item >
                          <IconButton>
-                         <Badge badgeContent={4} color='secondary'>
-                          <NotificationsNone  fontSize='small'/>
+                         <Badge badgeContent={4} color='secondary' fontSize='small' overlap='rectangular'>
+                          <NotificationsNone  fontSize='small' />
                          </Badge>
                          </IconButton>
 
                          <IconButton>
-                         <Badge badgeContent={4} color='primary'>
+                         <Badge badgeContent={4} color='primary' fontSize='small' overlap='rectangular'>
                           <ChatBubbleOutline fontSize='small'/>
                          </Badge>
                          </IconButton>

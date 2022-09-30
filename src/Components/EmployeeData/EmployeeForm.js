@@ -1,5 +1,5 @@
 import { FormControlLabel, Grid, RadioGroup, TextField, InputLabel,MenuItem, Radio, 
-    Select, FormControl, FormLabel, FormGroup, Checkbox, Button } from '@material-ui/core'
+    Select, FormControl, FormLabel, FormGroup, Checkbox, Button, Box, FormHelperText } from '@material-ui/core'
     import { format } from 'date-fns'
 import useStyles from './Styles'
 import useForm  from './useForm'
@@ -10,6 +10,7 @@ const initialData = {
     email: '',
     mobileNo: '',
     gender: 'male',
+    city: '',
     departmentId: '',
     hireDate: (format(new Date(), 'yyyy-MM-dd')),
     ispermanent: false
@@ -26,11 +27,12 @@ const genders = [{id: 'male', gender: 'Male'},
 
 const EmployeeForm = () => {
     const classes = useStyles()
-    const {values, setvalues, handleInputData, handleInputDate, handleInputCheckbox} = useForm(initialData)
+    const {values, handleInputData, handleInputDate, handleInputCheckbox, 
+           error, handleFormSubmit, handleResetForm} = useForm(initialData)
     
   return (
     <>
-        <form autoComplete='off' className={classes.employeeform}>
+        <form autoComplete='off' onSubmit={handleFormSubmit}>
             <Grid container >
                 <Grid item xs ={6}>
                 <TextField className={classes.inputdata} 
@@ -38,7 +40,11 @@ const EmployeeForm = () => {
                 variant='outlined' 
                 label='Full Name' 
                 value={values.fullName} 
-                onChange={handleInputData}></TextField>
+                onChange={handleInputData}
+                {...(error.fullName && {error:true,
+                    helperText: error.fullName})}
+                     >
+                </TextField>
 
                 <TextField className={classes.inputdata} 
                 name='email'  
@@ -46,14 +52,20 @@ const EmployeeForm = () => {
                 label='email ID' 
                 value={values.email}
                 onChange={handleInputData}
+                {...(error.email && {error:true,
+                    helperText: error.email})}
                 ></TextField>
 
                 <TextField className={classes.inputdata} 
-                name='mobileNo'  
+                name='mobileNo' 
                 variant='outlined' 
                 label='Mobile NO.' 
                 value={values.mobileNo}
                 onChange={handleInputData}
+                {...(error.mobileNo && {
+                    error:true,
+                    helperText: error.mobileNo
+                })}
                 ></TextField>
 
                 <TextField className={classes.inputdata} 
@@ -73,7 +85,7 @@ const EmployeeForm = () => {
                             ))}
                             </RadioGroup>      
                     </FormControl>
-                    <FormControl  style={{marginTop: '10px', width: '80%'}}>
+                    <FormControl  style={{marginTop: '10px', width: '80%'}} {...(error.departmentId && {error:true})}>
                          <InputLabel>Department</InputLabel>
                          <Select
                          name='departmentId'
@@ -84,9 +96,10 @@ const EmployeeForm = () => {
                                 <MenuItem key={department.id} value={department.id}>{department.depart}</MenuItem>
                             ))}
                          </Select>
+                         {error.departmentId && <FormHelperText>{error.departmentId}</FormHelperText>}
                     </FormControl>
 
-                    <form className={classes.dateContainer}>
+                    <Box className={classes.dateContainer}>
                         <TextField id='date'
                         label= 'Date of Joining'
                         type='date'
@@ -98,7 +111,7 @@ const EmployeeForm = () => {
                         }} onChange={handleInputDate}
                         >
                         </TextField>
-                    </form>
+                    </Box>
 
                     <FormGroup>
                          <FormControlLabel control={<Checkbox name='ispermanent' checked={values.ispermanent}
@@ -106,8 +119,8 @@ const EmployeeForm = () => {
                     </FormGroup>
 
                     <div className={classes.buttondiv}>
-                    <Button classes={classes.formButton} type='button' variant='outlined' >Reset</Button>
-                    <Button classes={classes.formButton} type='submit' variant='contained' color='primary'>Submit</Button>
+                    <Button className={classes.formButton} type='button' variant='outlined' onClick={handleResetForm}>Reset</Button>
+                    <Button className={classes.formButton} type='submit' variant='contained' color='primary'>Submit</Button>
                 </div>
                   
                 </Grid>
