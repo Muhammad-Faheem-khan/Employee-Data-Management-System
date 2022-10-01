@@ -1,61 +1,92 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@material-ui/core'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel } from '@material-ui/core'
 import React, {useState} from 'react'
 import * as employeeService from './EmployeeService'
 import useStyles from './Styles'
 
 const EmployeeTable = () => {
-const classes = useStyles()
-const pages = [5,10,15]
-const [record, setRecords] = useState(employeeService.getAllEmployees())
-const [page, setpage] = useState(0)
-const [rowsPerPage, setrowsPerPage] = useState(pages[page])
+    const classes = useStyles()
+    const pages = [5,10,15]
+    const [record, setRecords] = useState(employeeService.getAllEmployees())
+    const [page, setpage] = useState(0)
+    const [rowsPerPage, setrowsPerPage] = useState(pages[page])
+    const [order, setorder] = useState('')
+    const [orderBy, setorderBy] = useState('')
 
-   const headings = employeeService.headCells()
-const handleChangePage=(event, newpage)=>{
-  setpage(newpage)
-}
-const handleRowsperpage=event=>{
-  setrowsPerPage(parseInt(event.target.value, 10))
-  setpage(0)
-}
 
-const recordAfterpaging=(record)=>{
-  record.slice(page*rowsPerPage, (page+1)*rowsPerPage)
-}
+    const labels = employeeService.headCells()
+    const handleChangePage=(event, newpage)=>{
+          setpage(newpage)
+          }
+    const handleRowsperpage=event=>{
+          setrowsPerPage(parseInt(event.target.value, 10))
+          setpage(0)
+          }
 
+    // const recordAfterpaging = stableSort(record, getComparator(order, orderBy))
+    //       .slice(page*rowsPerPage, (page + 1)*rowsPerPage)
+
+    const sortedAndPagingData = employeeService.recordAfterpaging(record, getComparator(order, orderBy),page, rowsPerPage)
+         
+          
+    const createSortHandler = id =>{
+          const isAsc = orderBy === id && order === "asc"
+          setorder(isAsc ? "desc":"asc")
+          setorderBy(id)
+    } 
+    function descendingComparator(a, b, orderBy) {
+      if (b[orderBy] < a[orderBy]) {
+        return -1;
+      }
+      if (b[orderBy] > a[orderBy]) {
+        return 1;
+      }
+      return 0;
+    }
+    
+    function getComparator(order, orderBy) {
+      return order === 'desc'
+        ? (a, b) => descendingComparator(a, b, orderBy)
+        : (a, b) => -descendingComparator(a, b, orderBy);
+    }
+    
 
   return (
     <TableContainer>
-    <Table className={classes.table}>
+      <Table className={classes.table}>
         <TableHead >
-         <TableRow className={classes.tr} style={{fontWeight: '1000'}}>
-        {headings.map((headcell)=>(
-          <TableCell key={headcell.id}>{headcell.heading}</TableCell>
-        ))
-        }
-        </TableRow>
+          <TableRow>
+          {labels.map((headcell)=>(
+            <TableCell key={headcell.id} sortDirection={orderBy===headcell.id?order:false}>
+            <TableSortLabel
+              active={orderBy === headcell.id}
+              direction={orderBy === headcell.id ? order : 'asc'}
+              onClick={()=> {createSortHandler(headcell.id)}}
+            >
+              {headcell.label}
+              </TableSortLabel>
+            </TableCell>
+          ))}
+          </TableRow>
         </TableHead>
         <TableBody>
-        { record.map((employee)=> (
-        <TableRow className={classes.tr} key={employee.id}>
+          { sortedAndPagingData.map((employee)=> (
+          <TableRow className={classes.tr} key={employee.id}>
             <TableCell>{employee.fullName}</TableCell>
             <TableCell>{employee.email}</TableCell>
             <TableCell>{employee.mobileNo}</TableCell>
             <TableCell>{employee.department}</TableCell>
-        </TableRow> )
-        )
-        }
+          </TableRow> ))}
         </TableBody>
         
-    </Table>
-    <TablePagination 
+      </Table>
+      <TablePagination 
           component='div'
           page={page}
           rowsPerPage={rowsPerPage}
           rowsPerPageOptions={pages}
           count={record.length}
-          onchange={handleChangePage}
-          onChangeRowsPerPage={handleRowsperpage}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleRowsperpage}
         />
     </TableContainer>
     

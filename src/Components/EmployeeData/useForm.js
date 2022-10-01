@@ -9,11 +9,11 @@ const useForm = (initialData) => {
     
     const handleInputData = e =>{
        const {name, value} = e.target
-       validate(name)
        setvalues({
         ...values,
         [name]: value
        })
+       validate(name)
     }
     const handleInputCheckbox= e =>{
       setvalues({
