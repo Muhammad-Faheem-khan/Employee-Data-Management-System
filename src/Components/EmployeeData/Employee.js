@@ -16,7 +16,7 @@ const Employee = () => {
               pageicon={<PeopleOutlineTwoTone fontSize='large'/>}
             />
             <Paper className={classes.formpage}>
-            <EmployeeForm />
+            {/* <EmployeeForm /> */}
             <EmployeeTable />
             </Paper>
     </>
