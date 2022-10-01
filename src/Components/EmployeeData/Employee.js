@@ -1,6 +1,7 @@
 import React from 'react'
 import PageHeader from '../PageHeader'
 import EmployeeForm from './EmployeeForm'
+import EmployeeTable from './EmployeeTable'
 import { Paper } from '@material-ui/core'
 import { PeopleOutlineTwoTone } from '@material-ui/icons'
 import useStyles from './Styles'
@@ -15,7 +16,8 @@ const Employee = () => {
               pageicon={<PeopleOutlineTwoTone fontSize='large'/>}
             />
             <Paper className={classes.formpage}>
-            <EmployeeForm />
+            {/* <EmployeeForm /> */}
+            <EmployeeTable />
             </Paper>
     </>
   )

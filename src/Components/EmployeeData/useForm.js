@@ -37,7 +37,7 @@ const useForm = (initialData) => {
       else if(name==='mobileNo'){  temp.mobileNo = values.mobileNo.length >= 10 ?'':'Required 11 digits minimum'}
       else if(name==='departmentId') {temp.departmentId = values.departmentId=== '' ?'':'This field is required'}
       
-      else{
+      else if(name==='all'){
       temp.fullName = values.fullName?'':'This field is required'
       temp.email = (values.email ==='' || (/\S+@\S+\.\S+/).test(values.email))  ? '':'Email is not valid'
       temp.mobileNo = values.mobileNo.length >= 10 ?'':'Required 11 digits minimum'
@@ -51,8 +51,9 @@ const useForm = (initialData) => {
 
     const handleFormSubmit=(e)=>{
       e.preventDefault()
-      if(validate()){
+      if(validate('all')){
         employeeService.insertEmployeeData(values)
+        handleResetForm()
       }
     }
     const handleResetForm=()=>{

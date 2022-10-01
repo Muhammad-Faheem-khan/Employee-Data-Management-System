@@ -1,6 +1,7 @@
 import { FormControlLabel, Grid, RadioGroup, TextField, InputLabel,MenuItem, Radio, 
     Select, FormControl, FormLabel, FormGroup, Checkbox, Button, Box, FormHelperText } from '@material-ui/core'
     import { format } from 'date-fns'
+import { getdepartments } from './EmployeeService'
 import useStyles from './Styles'
 import useForm  from './useForm'
 
@@ -15,11 +16,7 @@ const initialData = {
     hireDate: (format(new Date(), 'yyyy-MM-dd')),
     ispermanent: false
 }
-
-const department = [{id:'web', depart: 'Web Development'},
-                    {id: 'sqa',depart: 'SQA'},
-                    {id:'hr', depart: 'HR'},
-                    {id:'mg', depart: 'Management'}]
+const department = getdepartments()
 
 const genders = [{id: 'male', gender: 'Male'},
                 {id: 'female', gender: 'Female'},

@@ -4,8 +4,13 @@ const KEYS ={
     employeeId: 'employeeId',
     employees: 'employees'
 }
-
-
+export function getdepartments(){
+        
+    return  [{id: 1, depart: 'Web Development'},
+                {id: 2,depart: 'SQA'},
+                {id:3, depart: 'HR'},
+                {id: 4, depart: 'Management'}]
+}
 
     export function insertEmployeeData(data){
         let employees = getAllEmployees();
@@ -27,6 +32,8 @@ const KEYS ={
 
         return JSON.parse(localStorage.getItem(KEYS.employees))
     }
+
+   
 
  
 
