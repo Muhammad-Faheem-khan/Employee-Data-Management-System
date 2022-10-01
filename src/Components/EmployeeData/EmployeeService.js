@@ -6,10 +6,19 @@ const KEYS ={
 }
 export function getdepartments(){
         
-    return  [{id: 1, depart: 'Web Development'},
-                {id: 2,depart: 'SQA'},
-                {id:3, depart: 'HR'},
-                {id: 4, depart: 'Management'}]
+    return  [{id: '1', depart: 'Web Development'},
+                {id: '2', depart: 'SQA'},
+                {id: '3', depart: 'HR'},
+                {id: '4', depart: 'Management'}]
+
+}
+export function headCells(){
+        
+    return      [{id: '1', heading: 'Employee Name'},
+                {id: '2', heading: 'Email'},
+                {id: '3', heading: 'Conatct No.'},
+                {id: '4', heading: 'Department'}]
+
 }
 
     export function insertEmployeeData(data){
@@ -30,7 +39,15 @@ export function getdepartments(){
         if(localStorage.getItem(KEYS.employees)==null)
         localStorage.setItem(KEYS.employees, JSON.stringify([]))
 
-        return JSON.parse(localStorage.getItem(KEYS.employees))
+        const employees = JSON.parse(localStorage.getItem(KEYS.employees))
+        let departments = getdepartments()
+         employees.map( x =>(
+                x['department'] = departments[x.departmentId - 1].depart
+        ))
+        console.log(employees)
+        console.log(departments)
+        
+        return employees
     }
 
    

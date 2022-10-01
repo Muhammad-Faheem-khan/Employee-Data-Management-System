@@ -1,25 +1,30 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core'
-import React from 'react'
+import React, {useState} from 'react'
 import * as employeeService from './EmployeeService'
 
 const EmployeeTable = () => {
-
-    const employees = employeeService.getAllEmployees()
+const [record, setRecords] = useState(employeeService.getAllEmployees())
+   const headings = employeeService.headCells()
   return (
     <TableContainer>
     <Table>
         <TableHead>
-            <TableCell>Employee Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Mobile No</TableCell>
+         <TableRow>
+        {headings.map((headcell)=>(
+          <TableCell id={headcell.id}>{headcell.heading}</TableCell>
+        ))
+        }
+        </TableRow>
         </TableHead>
         <TableBody>
-        { employees.map((employee)=> (
+        { record.map((employee)=> (
         <TableRow key={employee.id}>
             <TableCell>{employee.fullName}</TableCell>
             <TableCell>{employee.email}</TableCell>
             <TableCell>{employee.mobileNo}</TableCell>
-        </TableRow> ))
+            <TableCell>{employee.department}</TableCell>
+        </TableRow> )
+        )
         }
         </TableBody>
     </Table>

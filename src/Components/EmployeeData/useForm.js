@@ -35,7 +35,7 @@ const useForm = (initialData) => {
       if(name==='fullName') {temp.fullName = values.fullName?'':'This field is required'}
       else if(name==='email') {temp.email = (values.email ==='' || (/\S+@\S+\.\S+/).test(values.email))  ? '':'Email is not valid'}
       else if(name==='mobileNo'){  temp.mobileNo = values.mobileNo.length >= 10 ?'':'Required 11 digits minimum'}
-      else if(name==='departmentId') {temp.departmentId = values.departmentId=== '' ?'':'This field is required'}
+      else if(name==='departmentId') {temp.departmentId = values.departmentId.length !==0 ?'':'This field is required'}
       
       else if(name==='all'){
       temp.fullName = values.fullName?'':'This field is required'
