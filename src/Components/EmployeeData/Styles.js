@@ -7,7 +7,7 @@ const useStyles = makeStyles({
     },
     formpage: {
         padding: '1rem',
-        margin: '2.5rem'
+        margin: '2rem'
     },
     dateContainer: {
         margin: '20px 0',
@@ -35,8 +35,26 @@ const useStyles = makeStyles({
     
     employeeSearch: {
         width: '70%'
+    },
+
+    addButton: {
+        position: "absolute",
+        right: '10px'
+    },
+
+    dialogWrapper: {
+        '& .MuiPaper-root':{
+            position: 'absolute',
+            top: '10px',
+            padding: '1rem'
+    },
+    actionBtn: {
+        minWidth: '0',
+        padding: '0px',
+        margin: '0.5rem',
+        color: '#897799'
     }
-  
+}
 })
 
 export default useStyles

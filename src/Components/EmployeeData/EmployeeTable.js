@@ -1,11 +1,11 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination,TextField, TableRow, 
-  TableSortLabel,  Toolbar, InputAdornment } from '@material-ui/core'
-  import { Search } from '@material-ui/icons'
+  TableSortLabel,  Toolbar, InputAdornment, Button } from '@material-ui/core'
+  import { Add, Search } from '@material-ui/icons'
 import React, {useState} from 'react'
 import * as employeeService from './EmployeeService'
 import useStyles from './Styles'
 
-const EmployeeTable = () => {
+const EmployeeTable = ({handleAddNewEmployee}) => {
     const classes = useStyles()
     const pages = [5,10,15]
     const [record, setRecords] = useState(employeeService.getAllEmployees())
@@ -39,6 +39,7 @@ const EmployeeTable = () => {
           }})
     }
 
+
 //Sorting Functions//
     function descendingComparator(a, b, orderBy) {
       if (b[orderBy] < a[orderBy]) {
@@ -61,6 +62,7 @@ const EmployeeTable = () => {
     const sortedAndPagingData =  filterFn.fn(record).slice(page*rowsPerPage, (page + 1)*rowsPerPage).sort(getComparator(order, orderBy))
 
   return (
+    <>    
     <TableContainer>
       <Toolbar className={classes.searchToolbar}>
       <TextField label='Search Employee'
@@ -75,6 +77,15 @@ const EmployeeTable = () => {
                 onChange={handleEmployeeSearch}
                 >
       </TextField> 
+      <Button variant='outlined' 
+              type='button'
+              className={classes.addButton}
+              startIcon= {
+                <Add />
+              }
+              onClick={handleAddNewEmployee}
+      >Add new</Button>
+
       </Toolbar>
       <Table className={classes.table}>
         <TableHead >
@@ -113,6 +124,9 @@ const EmployeeTable = () => {
           onRowsPerPageChange={handleRowsperpage}
         />
     </TableContainer>
+    
+    </>
+
     
   )
 }
