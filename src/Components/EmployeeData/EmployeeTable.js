@@ -9,7 +9,7 @@ const EmployeeTable = () => {
     const [record, setRecords] = useState(employeeService.getAllEmployees())
     const [page, setpage] = useState(0)
     const [rowsPerPage, setrowsPerPage] = useState(pages[page])
-    const [order, setorder] = useState('')
+    const [order, setorder] = useState('asc')
     const [orderBy, setorderBy] = useState('')
 
 
@@ -21,12 +21,6 @@ const EmployeeTable = () => {
           setrowsPerPage(parseInt(event.target.value, 10))
           setpage(0)
           }
-
-    // const recordAfterpaging = stableSort(record, getComparator(order, orderBy))
-    //       .slice(page*rowsPerPage, (page + 1)*rowsPerPage)
-
-    const sortedAndPagingData = employeeService.recordAfterpaging(record, getComparator(order, orderBy),page, rowsPerPage)
-         
           
     const createSortHandler = id =>{
           const isAsc = orderBy === id && order === "asc"
@@ -44,11 +38,12 @@ const EmployeeTable = () => {
     }
     
     function getComparator(order, orderBy) {
-      return order === 'desc'
-        ? (a, b) => descendingComparator(a, b, orderBy)
-        : (a, b) => -descendingComparator(a, b, orderBy);
+  
+      return order === "desc" ? (a, b) => descendingComparator(a, b, orderBy)
+        : (a, b) => -descendingComparator(a, b, orderBy)
     }
-    
+    const sortedAndPagingData =  record.slice(page*rowsPerPage, (page + 1)*rowsPerPage).sort(getComparator(order, orderBy))
+
 
   return (
     <TableContainer>
@@ -58,9 +53,9 @@ const EmployeeTable = () => {
           {labels.map((headcell)=>(
             <TableCell key={headcell.id} sortDirection={orderBy===headcell.id?order:false}>
             <TableSortLabel
-              active={orderBy === headcell.id}
-              direction={orderBy === headcell.id ? order : 'asc'}
-              onClick={()=> {createSortHandler(headcell.id)}}
+              active={orderBy === headcell.name}
+              direction={orderBy === headcell.name ? order : 'asc'}
+              onClick={()=> {createSortHandler(headcell.name)}}
             >
               {headcell.label}
               </TableSortLabel>

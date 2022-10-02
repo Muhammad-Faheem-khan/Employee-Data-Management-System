@@ -14,10 +14,10 @@ export function getdepartments(){
 }
 export function headCells(){
         
-    return      [{id: '1', label: 'Employee Name'},
-                {id: '2', label: 'Email'},
-                {id: '3', label: 'Conatct No.'},
-                {id: '4', label: 'Department'}]
+    return      [{id: '1', name: 'fullName',label: 'Employee Name'},
+                {id: '2', name: 'email',label: 'Email'},
+                {id: '3', name: 'contactNo',label: 'Conatct No.'},
+                {id: '4', name:'department', label: 'Department'}]
 
 }
 
@@ -47,45 +47,8 @@ export function headCells(){
         return employees
     }
 
-    export function recordAfterpaging(a,b,c,d) {
-        
-       return stableSort(a, b)
-    .slice(c*d, (c + 1)*d)
-    }
-
     
-    // functions for sorting Objects
     
-function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
-    return 0;
-  }
-  
-  function getComparator(order, orderBy) {
-    return order === 'desc'
-      ? (a, b) => descendingComparator(a, b, orderBy)
-      : (a, b) => -descendingComparator(a, b, orderBy);
-  }
-  
-  // This method is created for cross-browser compatibility, if you don't
-  // need to support IE11, you can use Array.prototype.sort() directly
-  function stableSort(array, comparator) {
-    const stabilizedThis = array.map((el, index) => [el, index]);
-    stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) {
-        return order;
-      }
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map((el) => el[0]);
-  }
-
    
 
  
