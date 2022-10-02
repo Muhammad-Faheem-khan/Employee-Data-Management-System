@@ -1,4 +1,6 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel } from '@material-ui/core'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination,TextField, TableRow, 
+  TableSortLabel,  Toolbar, InputAdornment } from '@material-ui/core'
+  import { Search } from '@material-ui/icons'
 import React, {useState} from 'react'
 import * as employeeService from './EmployeeService'
 import useStyles from './Styles'
@@ -11,6 +13,7 @@ const EmployeeTable = () => {
     const [rowsPerPage, setrowsPerPage] = useState(pages[page])
     const [order, setorder] = useState('asc')
     const [orderBy, setorderBy] = useState('')
+    const [filterFn, setfilterFn] = useState({fn: items=>{return items}})
 
 
     const labels = employeeService.headCells()
@@ -27,6 +30,16 @@ const EmployeeTable = () => {
           setorder(isAsc ? "desc":"asc")
           setorderBy(id)
     } 
+
+    const handleEmployeeSearch=(e)=>{
+      let target = e.target
+          setfilterFn({ fn: items =>{
+            if(target.value==='') return items
+            else return items.filter(x => x.fullName.toLowerCase().includes(target.value))
+          }})
+    }
+
+//Sorting Functions//
     function descendingComparator(a, b, orderBy) {
       if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -42,11 +55,27 @@ const EmployeeTable = () => {
       return order === "desc" ? (a, b) => descendingComparator(a, b, orderBy)
         : (a, b) => -descendingComparator(a, b, orderBy)
     }
-    const sortedAndPagingData =  record.slice(page*rowsPerPage, (page + 1)*rowsPerPage).sort(getComparator(order, orderBy))
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const sortedAndPagingData =  filterFn.fn(record).slice(page*rowsPerPage, (page + 1)*rowsPerPage).sort(getComparator(order, orderBy))
 
   return (
     <TableContainer>
+      <Toolbar className={classes.searchToolbar}>
+      <TextField label='Search Employee'
+                className={classes.employeeSearch}
+                name='employeeSearch'
+                variant='outlined'
+                InputProps={{
+                    startAdornment: ( <InputAdornment position= 'start'>
+                                      <Search  /> 
+                                  </InputAdornment>) 
+                }}
+                onChange={handleEmployeeSearch}
+                >
+      </TextField> 
+      </Toolbar>
       <Table className={classes.table}>
         <TableHead >
           <TableRow>

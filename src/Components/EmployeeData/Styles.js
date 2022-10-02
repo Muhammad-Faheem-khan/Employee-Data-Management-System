@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core";
-import { hover } from "@testing-library/user-event/dist/hover";
 
 const useStyles = makeStyles({
     inputdata:{
@@ -24,13 +23,19 @@ const useStyles = makeStyles({
     table: {
         '& th':{
             fontWeight: '700',
-            backgroundColor: '#D3D3D3'
+            backgroundColor: '#D3D3D3',
         },
     
     '& tbody tr:hover': {
             backgroundColor: '#CCE7E7',
         }
     },
+  searchToolbar: {
+    margin: '10px'},
+    
+    employeeSearch: {
+        width: '70%'
+    }
   
 })
 

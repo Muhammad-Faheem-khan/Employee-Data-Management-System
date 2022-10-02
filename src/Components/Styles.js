@@ -27,6 +27,8 @@ const useStyles = makeStyles({
         padding: '0px 8px',
         opacity: '0.6',
         fontSize: '0.8rem',
+        border: '1px solid #000',
+        borderRadius: '5px',
         '&:hover': {
         backgroundColor: '#f2f2f2'
         }
