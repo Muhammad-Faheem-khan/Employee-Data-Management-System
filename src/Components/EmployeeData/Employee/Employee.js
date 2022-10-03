@@ -7,6 +7,8 @@ import * as employeeService from '../EmployeeService'
 import { Paper } from '@material-ui/core'
 import {  PeopleOutlineTwoTone } from '@material-ui/icons'
 import useStyles from '../Styles'
+import Notification from '../../Notifications/Notification'
+import ConfirnDialog from '../../Notifications/ConfirnDialog'
 
 
 const Employee = () => {
@@ -15,6 +17,8 @@ const Employee = () => {
     const classes = useStyles()
     const [openPopUp, setopenPopUp] = useState(false)
     const [recordForEdit, setrecordForEdit] = useState(null)
+    const [notify, setNotify] = useState({isopen: false, message: '', type:''})
+    const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subtitle:''})
 
     const handleAddNewEmployee=()=>{
        setopenPopUp(true)
@@ -29,12 +33,43 @@ const Employee = () => {
         setrecordForEdit(null)
         handleResetForm()
         setopenPopUp(false)
+        setNotify({
+          isOpen: true,
+          message: 'Submitted Successfully',
+          type: 'Success'
+        })
         setRecords(employeeService.getAllEmployees())
      }
 
      const openInPopup=(item)=>{
       setopenPopUp(true)
       setrecordForEdit(item)
+     }
+
+     const deleteEmployee=(id)=>{
+        employeeService.deleteEmployeeData(id)
+        setRecords(employeeService.getAllEmployees())
+        setNotify({
+          isOpen: true,
+          message: 'Deleted Successfully',
+          type: 'error'          
+        })
+      }
+     
+
+     const deningConfirmDialog=()=>{
+      setConfirmDialog({
+        ...confirmDialog,
+        isOpen: false
+      })
+     }
+
+     const handleDeletingData=()=>{
+      setConfirmDialog({
+        title: 'Are you sure to delete Data?',
+        subtitle: "You will not be able to undo.",
+        isOpen: true
+      })
      }
   return (
     <>
@@ -44,11 +79,20 @@ const Employee = () => {
             />
             <Paper className={classes.formpage}>
             
-            <EmployeeTable handleAddNewEmployee= {handleAddNewEmployee} record={record} openInPopup={openInPopup}/>
+            <EmployeeTable handleAddNewEmployee= {handleAddNewEmployee} 
+            record={record} openInPopup={openInPopup} 
+            handleDeletingData={handleDeletingData}
+
+            />
             </Paper>
             <PopUpWindow  openPopUp={openPopUp} handleWindowClose={handleWindowClose}>
             <EmployeeForm addAndEdit={addAndEdit} recordForEdit={recordForEdit}/>
             </PopUpWindow>
+            <Notification notify={notify} setNotify={setNotify}/>
+            <ConfirnDialog confirmDialog={confirmDialog} 
+                            deleteEmployee={deleteEmployee}
+                            deningConfirmDialog={deningConfirmDialog}
+            />
     </>
   )
 }

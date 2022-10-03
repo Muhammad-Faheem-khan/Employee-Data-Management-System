@@ -1,7 +1,7 @@
 
 import { makeStyles } from '@material-ui/core'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme=>({
     
     sidebar:{
         display: 'flex',
@@ -51,8 +51,18 @@ const useStyles = makeStyles({
    
     pagetitle: {
         padding: '1rem'
-    }
+    },
+
     
-})
+
+    confirmdialog: {
+    '& .MuiDialog-paper': {
+        padding: '5px',
+        position: 'absolute',
+        top: '60px',
+}
+    }
+
+}))
 
 export default useStyles

@@ -5,7 +5,8 @@ import React, {useState} from 'react'
 import * as employeeService from '../EmployeeService'
 import useStyles from '../Styles'
 
-const EmployeeTable = ({handleAddNewEmployee, record, openInPopup}) => {
+const EmployeeTable = ({handleAddNewEmployee, record, openInPopup, handleDeletingData}) => {
+
     const classes = useStyles()
     const pages = [5,10,15]
     const [page, setpage] = useState(0)
@@ -118,7 +119,8 @@ const EmployeeTable = ({handleAddNewEmployee, record, openInPopup}) => {
               <EditOutlined fontSize='small'/>
               </Button>
               <Button variant='outlined'  
-              className={classes.actionBtndelete}>
+              className={classes.actionBtndelete}
+              onClick={handleDeletingData}>
               <Close fontSize='small'/>
               </Button>
               </div>
