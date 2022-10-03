@@ -17,7 +17,9 @@ export function headCells(){
     return      [{id: '1', name: 'fullName',label: 'Employee Name'},
                 {id: '2', name: 'email',label: 'Email'},
                 {id: '3', name: 'contactNo',label: 'Conatct No.'},
-                {id: '4', name:'department', label: 'Department'}]
+                {id: '4', name:'department', label: 'Department'},
+                {id: '5', name:'actionButtons', label: 'Actions'}
+            ]
 
 }
 
@@ -27,6 +29,7 @@ export function headCells(){
         employees.push(data)
         localStorage.setItem(KEYS.employees, JSON.stringify(employees))
     }
+
     export function generateEmployeeId() {
         if(localStorage.getItem(KEYS.employeeId)==null)
         localStorage.setItem(KEYS.employeeId, '0')
@@ -35,6 +38,15 @@ export function headCells(){
 
         return id;
     }
+
+    export function updateEmployee(data) {
+        let employees = getAllEmployees();
+        const recordIndex = employees.findIndex(x=> x.id==data.id)
+        employees[recordIndex] = {...data}
+        localStorage.setItem(KEYS.employees, JSON.stringify(employees))
+    }
+
+
     export function getAllEmployees() {
         if(localStorage.getItem(KEYS.employees)==null)
         localStorage.setItem(KEYS.employees, JSON.stringify([]))

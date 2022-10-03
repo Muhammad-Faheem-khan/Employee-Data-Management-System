@@ -22,10 +22,11 @@ const genders = [{id: 'male', gender: 'Male'},
                 {id: 'female', gender: 'Female'},
                 {id: 'other', gender: 'Other'}]
 
-const EmployeeForm = ( {addAndEdit}) => {
+const EmployeeForm = ( {addAndEdit, recordForEdit}) => {
     const classes = useStyles()
     const {values, handleInputData, handleInputDate, handleInputCheckbox, 
-           error, handleFormSubmit, handleResetForm} = useForm(initialData, addAndEdit)
+           error, handleFormSubmit, handleResetForm} = useForm(initialData, addAndEdit, recordForEdit)
+    
     
   return (
     <>

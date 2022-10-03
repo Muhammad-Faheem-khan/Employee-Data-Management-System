@@ -1,7 +1,7 @@
 
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
-const useForm = (initialData, addAndEdit) => {
+const useForm = (initialData, addAndEdit, recordForEdit) => {
   const [values, setvalues] = useState(initialData)
   const [error, setError] = useState({})
     
@@ -57,6 +57,15 @@ const useForm = (initialData, addAndEdit) => {
       setvalues(initialData)
       setError({})
     }
+
+    useEffect(()=>{
+      if(recordForEdit != null){
+          setvalues({
+              ...recordForEdit
+          })
+      }
+  },[recordForEdit])
+
 
   return {
     values,

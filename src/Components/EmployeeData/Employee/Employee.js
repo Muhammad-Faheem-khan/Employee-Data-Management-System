@@ -14,18 +14,27 @@ const Employee = () => {
   const [record, setRecords] = useState(employeeService.getAllEmployees())
     const classes = useStyles()
     const [openPopUp, setopenPopUp] = useState(false)
+    const [recordForEdit, setrecordForEdit] = useState(null)
 
     const handleAddNewEmployee=()=>{
        setopenPopUp(true)
+       setrecordForEdit(null)
     }
      const handleWindowClose=()=>{
       setopenPopUp(false) 
      }
      const addAndEdit = (values, handleResetForm)=>{
-      employeeService.insertEmployeeData(values)
+      if(values.id===0) employeeService.insertEmployeeData(values)
+        else employeeService.updateEmployee(values)
+        setrecordForEdit(null)
         handleResetForm()
         setopenPopUp(false)
         setRecords(employeeService.getAllEmployees())
+     }
+
+     const openInPopup=(item)=>{
+      setopenPopUp(true)
+      setrecordForEdit(item)
      }
   return (
     <>
@@ -35,10 +44,10 @@ const Employee = () => {
             />
             <Paper className={classes.formpage}>
             
-            <EmployeeTable handleAddNewEmployee= {handleAddNewEmployee} record={record}/>
+            <EmployeeTable handleAddNewEmployee= {handleAddNewEmployee} record={record} openInPopup={openInPopup}/>
             </Paper>
             <PopUpWindow  openPopUp={openPopUp} handleWindowClose={handleWindowClose}>
-            <EmployeeForm addAndEdit={addAndEdit}/>
+            <EmployeeForm addAndEdit={addAndEdit} recordForEdit={recordForEdit}/>
             </PopUpWindow>
     </>
   )

@@ -49,12 +49,20 @@ const useStyles = makeStyles(theme=>({
             padding: '1rem'
     }},
 
-    actionBtn: {
+    actionBtndelete: {
        minWidth: '0',
        margin: '4px',
+       padding: '2px',
        backgroundColor: '#FFCCCB',
-       color: 'red'
-    }
+       color: 'red',
+    },
+    actionBtnedit: {
+        minWidth: '0',
+        margin: '4px',
+        padding: '2px',
+        backgroundColor: '#ADD8E6',
+        color: 'blue',
+     }
 
 }))
 

@@ -1,11 +1,11 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination,TextField, TableRow, 
   TableSortLabel,  Toolbar, InputAdornment, Button } from '@material-ui/core'
-  import { Add, Search } from '@material-ui/icons'
+  import { Add, Close, EditOutlined, Search } from '@material-ui/icons'
 import React, {useState} from 'react'
 import * as employeeService from '../EmployeeService'
 import useStyles from '../Styles'
 
-const EmployeeTable = ({handleAddNewEmployee, record}) => {
+const EmployeeTable = ({handleAddNewEmployee, record, openInPopup}) => {
     const classes = useStyles()
     const pages = [5,10,15]
     const [page, setpage] = useState(0)
@@ -13,7 +13,6 @@ const EmployeeTable = ({handleAddNewEmployee, record}) => {
     const [order, setorder] = useState('asc')
     const [orderBy, setorderBy] = useState('')
     const [filterFn, setfilterFn] = useState({fn: items=>{return items}})
-
 
     const labels = employeeService.headCells()
     const handleChangePage=(event, newpage)=>{
@@ -41,6 +40,7 @@ const EmployeeTable = ({handleAddNewEmployee, record}) => {
 
 //Sorting Functions//
     function descendingComparator(a, b, orderBy) {
+
       if (b[orderBy] < a[orderBy]) {
         return -1;
       }
@@ -109,6 +109,20 @@ const EmployeeTable = ({handleAddNewEmployee, record}) => {
             <TableCell>{employee.email}</TableCell>
             <TableCell>{employee.mobileNo}</TableCell>
             <TableCell>{employee.department}</TableCell>
+            <TableCell>
+            <div style={{display: 'flex'}}>
+              <Button variant='outlined' 
+              className={classes.actionBtnedit}
+              onClick={()=>{openInPopup(employee)}}
+              >
+              <EditOutlined fontSize='small'/>
+              </Button>
+              <Button variant='outlined'  
+              className={classes.actionBtndelete}>
+              <Close fontSize='small'/>
+              </Button>
+              </div>
+            </TableCell>
           </TableRow> ))}
         </TableBody>
         
