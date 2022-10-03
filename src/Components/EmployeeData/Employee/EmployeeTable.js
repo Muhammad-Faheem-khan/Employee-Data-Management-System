@@ -2,13 +2,12 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination
   TableSortLabel,  Toolbar, InputAdornment, Button } from '@material-ui/core'
   import { Add, Search } from '@material-ui/icons'
 import React, {useState} from 'react'
-import * as employeeService from './EmployeeService'
-import useStyles from './Styles'
+import * as employeeService from '../EmployeeService'
+import useStyles from '../Styles'
 
-const EmployeeTable = ({handleAddNewEmployee}) => {
+const EmployeeTable = ({handleAddNewEmployee, record}) => {
     const classes = useStyles()
     const pages = [5,10,15]
-    const [record, setRecords] = useState(employeeService.getAllEmployees())
     const [page, setpage] = useState(0)
     const [rowsPerPage, setrowsPerPage] = useState(pages[page])
     const [order, setorder] = useState('asc')

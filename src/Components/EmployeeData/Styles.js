@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme=>({
     inputdata:{
         width: '80%',
         marginBottom: '10px'
@@ -47,14 +47,15 @@ const useStyles = makeStyles({
             position: 'absolute',
             top: '10px',
             padding: '1rem'
-    },
+    }},
+
     actionBtn: {
-        minWidth: '0',
-        padding: '0px',
-        margin: '0.5rem',
-        color: '#897799'
+       minWidth: '0',
+       margin: '4px',
+       backgroundColor: '#FFCCCB',
+       color: 'red'
     }
-}
-})
+
+}))
 
 export default useStyles

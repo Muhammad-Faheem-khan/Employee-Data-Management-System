@@ -1,9 +1,9 @@
 import { FormControlLabel, Grid, RadioGroup, TextField, InputLabel,MenuItem, Radio, 
     Select, FormControl, FormLabel, FormGroup, Checkbox, Button, Box, FormHelperText } from '@material-ui/core'
     import { format } from 'date-fns'
-import { getdepartments } from './EmployeeService'
-import useStyles from './Styles'
-import useForm  from './useForm'
+import { getdepartments } from '../EmployeeService'
+import useStyles from '../Styles'
+import useForm  from '../useForm'
 
 const initialData = {
     id: '',
@@ -22,10 +22,10 @@ const genders = [{id: 'male', gender: 'Male'},
                 {id: 'female', gender: 'Female'},
                 {id: 'other', gender: 'Other'}]
 
-const EmployeeForm = () => {
+const EmployeeForm = ( {addAndEdit}) => {
     const classes = useStyles()
     const {values, handleInputData, handleInputDate, handleInputCheckbox, 
-           error, handleFormSubmit, handleResetForm} = useForm(initialData)
+           error, handleFormSubmit, handleResetForm} = useForm(initialData, addAndEdit)
     
   return (
     <>

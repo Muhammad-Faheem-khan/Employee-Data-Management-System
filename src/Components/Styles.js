@@ -2,6 +2,7 @@
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({
+    
     sidebar:{
         display: 'flex',
         flexDirection: 'row',
@@ -51,7 +52,7 @@ const useStyles = makeStyles({
     pagetitle: {
         padding: '1rem'
     }
-
+    
 })
 
 export default useStyles

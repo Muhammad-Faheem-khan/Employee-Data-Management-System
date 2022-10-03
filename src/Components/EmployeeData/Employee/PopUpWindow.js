@@ -1,6 +1,6 @@
-import { Button, Dialog, DialogContent, DialogTitle, Typography } from '@material-ui/core'
+import { Button, Dialog, DialogContent, DialogTitle, Typography} from '@material-ui/core'
 import React from 'react'
-import useStyles from './Styles'
+import useStyles from '../Styles'
 
 const PopUpWindow = ({children, openPopUp, handleWindowClose}) => {
     const classes = useStyles()
@@ -12,7 +12,7 @@ const PopUpWindow = ({children, openPopUp, handleWindowClose}) => {
             <Typography variant='h6' component='div' style={{flexGrow: 1}}>
                 Employee Form
             </Typography>
-            <Button variant='outlined' className={classes.actionBtn} type='button' onClick={handleWindowClose}>X</Button>
+            <Button variant='contained' onClick={handleWindowClose} className={classes.actionBtn}>X</Button>
             </div>
         </DialogTitle>
         <DialogContent dividers >

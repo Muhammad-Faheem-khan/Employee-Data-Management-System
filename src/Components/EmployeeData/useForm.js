@@ -1,9 +1,7 @@
 
 import React, {useState} from 'react'
 
-import * as employeeService from './EmployeeService'
-
-const useForm = (initialData) => {
+const useForm = (initialData, addAndEdit) => {
   const [values, setvalues] = useState(initialData)
   const [error, setError] = useState({})
     
@@ -52,8 +50,7 @@ const useForm = (initialData) => {
     const handleFormSubmit=(e)=>{
       e.preventDefault()
       if(validate('all')){
-        employeeService.insertEmployeeData(values)
-        handleResetForm()
+       addAndEdit(values, handleResetForm)
       }
     }
     const handleResetForm=()=>{
