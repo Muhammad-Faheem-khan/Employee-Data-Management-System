@@ -18,7 +18,7 @@ const Employee = () => {
     const [openPopUp, setopenPopUp] = useState(false)
     const [recordForEdit, setrecordForEdit] = useState(null)
     const [notify, setNotify] = useState({isopen: false, message: '', type:''})
-    const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: '', subtitle:''})
+    const [confirmDialog, setConfirmDialog] = useState({isOpen: false, id: 0, title: '', subtitle:''})
 
     const handleAddNewEmployee=()=>{
        setopenPopUp(true)
@@ -28,7 +28,7 @@ const Employee = () => {
       setopenPopUp(false) 
      }
      const addAndEdit = (values, handleResetForm)=>{
-      if(values.id===0) employeeService.insertEmployeeData(values)
+      if(values.id==0) employeeService.insertEmployeeData(values)
         else employeeService.updateEmployee(values)
         setrecordForEdit(null)
         handleResetForm()
@@ -36,7 +36,7 @@ const Employee = () => {
         setNotify({
           isOpen: true,
           message: 'Submitted Successfully',
-          type: 'Success'
+          type: 'success'
         })
         setRecords(employeeService.getAllEmployees())
      }
@@ -54,6 +54,10 @@ const Employee = () => {
           message: 'Deleted Successfully',
           type: 'error'          
         })
+        setConfirmDialog({
+          ...confirmDialog,
+          isOpen: false
+        })
       }
      
 
@@ -64,11 +68,12 @@ const Employee = () => {
       })
      }
 
-     const handleDeletingData=()=>{
+     const handleDeletingData=(id)=>{
       setConfirmDialog({
         title: 'Are you sure to delete Data?',
         subtitle: "You will not be able to undo.",
-        isOpen: true
+        isOpen: true,
+        id: id
       })
      }
   return (

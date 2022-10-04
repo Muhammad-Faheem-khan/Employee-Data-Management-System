@@ -122,7 +122,7 @@ const EmployeeTable = ({handleAddNewEmployee, record, openInPopup, handleDeletin
               </Button>
               <Button variant='outlined'  
               className={classes.actionBtndelete}
-              onClick={handleDeletingData}>
+              onClick={()=>{handleDeletingData(employee.id)}}>
               <Close fontSize='small'/>
               </Button>
               </div>

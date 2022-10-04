@@ -10,7 +10,7 @@ const ConfirnDialog = ({confirmDialog, deleteEmployee, deningConfirmDialog}) => 
     <Dialog open={confirmDialog.isOpen}
             className={classes.confirmdialog}>
         <DialogTitle >
-             <IconButton disableRipple size='large' style={{marginLeft: '100px'}}>
+             <IconButton disableRipple size='medium' style={{marginLeft: '100px'}}>
                 <NotListedLocation fontSize='large' />
             </IconButton>
         </DialogTitle>
@@ -22,7 +22,7 @@ const ConfirnDialog = ({confirmDialog, deleteEmployee, deningConfirmDialog}) => 
             <Button variant='contained' color= 'secondary' 
             onClick={deningConfirmDialog}
             >No</Button>
-            <Button variant='contained' color= 'primary' onClick={deleteEmployee}>Yes</Button>
+            <Button variant='contained' color= 'primary' onClick={()=>{deleteEmployee(confirmDialog.id)}}>Yes</Button>
         </DialogActions>
     </Dialog>
   )
