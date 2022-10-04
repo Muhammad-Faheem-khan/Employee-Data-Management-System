@@ -10,7 +10,7 @@ const Header = () => {
                 <Toolbar>
                     <Grid container alignItems='center'>
                          <Grid item >
-                            <InputBase className={classes.searchbar} placeholder='Search here'
+                            <InputBase className={classes.searchbar} placeholder='Employee Database'
                               startAdornment={ <Search fontSize='small' /> }
                             />
                          </Grid>
