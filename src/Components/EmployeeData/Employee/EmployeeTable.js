@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination,TextField, TableRow, 
   TableSortLabel,  Toolbar, InputAdornment, Button } from '@material-ui/core'
-  import { Add, Close, EditOutlined, Search } from '@material-ui/icons'
+import { Add, Close, EditOutlined, Search } from '@material-ui/icons'
 import React, {useState} from 'react'
 import * as employeeService from '../EmployeeService'
 import useStyles from '../Styles'
@@ -16,9 +16,11 @@ const EmployeeTable = ({handleAddNewEmployee, record, openInPopup, handleDeletin
     const [filterFn, setfilterFn] = useState({fn: items=>{return items}})
 
     const labels = employeeService.headCells()
+
     const handleChangePage=(event, newpage)=>{
           setpage(newpage)
           }
+
     const handleRowsperpage=event=>{
           setrowsPerPage(parseInt(event.target.value, 10))
           setpage(0)
@@ -37,7 +39,6 @@ const EmployeeTable = ({handleAddNewEmployee, record, openInPopup, handleDeletin
             else return items.filter(x => x.fullName.toLowerCase().includes(target.value))
           }})
     }
-
 
 //Sorting Functions//
     function descendingComparator(a, b, orderBy) {
@@ -59,7 +60,8 @@ const EmployeeTable = ({handleAddNewEmployee, record, openInPopup, handleDeletin
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const sortedAndPagingData =  filterFn.fn(record).slice(page*rowsPerPage, (page + 1)*rowsPerPage).sort(getComparator(order, orderBy))
+    const sortedAndPagingData =  filterFn.fn(record).slice(page*rowsPerPage, 
+      (page + 1)*rowsPerPage).sort(getComparator(order, orderBy))
 
   return (
     <>    
@@ -138,11 +140,9 @@ const EmployeeTable = ({handleAddNewEmployee, record, openInPopup, handleDeletin
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleRowsperpage}
         />
-    </TableContainer>
-    
+    </TableContainer>    
     </>
 
-    
   )
 }
 

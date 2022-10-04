@@ -4,6 +4,7 @@ const KEYS ={
     employeeId: 'employeeId',
     employees: 'employees'
 }
+
 export function getdepartments(){
         
     return  [{id: '1', depart: 'Web Development'},
@@ -12,6 +13,7 @@ export function getdepartments(){
                 {id: '4', depart: 'Management'}]
 
 }
+
 export function headCells(){
         
     return      [{id: '1', name: 'fullName',label: 'Employee Name'},

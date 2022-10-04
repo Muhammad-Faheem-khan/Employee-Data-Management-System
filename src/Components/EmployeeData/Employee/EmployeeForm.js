@@ -1,6 +1,6 @@
 import { FormControlLabel, Grid, RadioGroup, TextField, InputLabel,MenuItem, Radio, 
-    Select, FormControl, FormLabel, FormGroup, Checkbox, Button, Box, FormHelperText } from '@material-ui/core'
-    import { format } from 'date-fns'
+    Select, FormControl, FormLabel, FormGroup, Checkbox, Button, Box} from '@material-ui/core'
+import { format } from 'date-fns'
 import { getdepartments } from '../EmployeeService'
 import useStyles from '../Styles'
 import useForm  from '../useForm'
@@ -27,7 +27,7 @@ const EmployeeForm = ( {addAndEdit, recordForEdit}) => {
     const {values, handleInputData, handleInputDate, handleInputCheckbox, 
            error, handleFormSubmit, handleResetForm} = useForm(initialData, addAndEdit, recordForEdit)
     
-    
+
   return (
     <>
         <form autoComplete='off' onSubmit={handleFormSubmit}>
@@ -94,7 +94,6 @@ const EmployeeForm = ( {addAndEdit, recordForEdit}) => {
                                 <MenuItem key={department.id} value={department.id}>{department.depart}</MenuItem>
                             ))}
                          </Select>
-                         {error.departmentId && <FormHelperText>{error.departmentId}</FormHelperText>}
                     </FormControl>
 
                     <Box className={classes.dateContainer}>

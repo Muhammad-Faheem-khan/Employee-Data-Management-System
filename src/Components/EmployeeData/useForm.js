@@ -1,4 +1,3 @@
-
 import {useState, useEffect} from 'react'
 
 const useForm = (initialData, addAndEdit, recordForEdit) => {
@@ -13,12 +12,14 @@ const useForm = (initialData, addAndEdit, recordForEdit) => {
        })
        validate(name)
     }
+    
     const handleInputCheckbox= e =>{
       setvalues({
         ...values,
         ispermanent: e.target.checked
       })
     }
+    
     const handleInputDate=e=>{
       setvalues({
         ...values,
@@ -33,13 +34,11 @@ const useForm = (initialData, addAndEdit, recordForEdit) => {
       if(name==='fullName') {temp.fullName = values.fullName?'':'This field is required'}
       else if(name==='email') {temp.email = (values.email ==='' || (/\S+@\S+\.\S+/).test(values.email))  ? '':'Email is not valid'}
       else if(name==='mobileNo'){  temp.mobileNo = values.mobileNo.length >= 10 ?'':'Required 11 digits minimum'}
-      else if(name==='departmentId') {temp.departmentId = values.departmentId.length !==0 ?'':'This field is required'}
       
       else if(name==='all'){
       temp.fullName = values.fullName?'':'This field is required'
       temp.email = (values.email ==='' || (/\S+@\S+\.\S+/).test(values.email))  ? '':'Email is not valid'
-      temp.mobileNo = values.mobileNo.length >= 10 ?'':'Required 11 digits minimum'
-      temp.departmentId = values.departmentId.length !== 0 ?'':'This field is required'}
+      temp.mobileNo = values.mobileNo.length >= 10 ?'':'Required 11 digits minimum'}
       
       setError({
         ...temp

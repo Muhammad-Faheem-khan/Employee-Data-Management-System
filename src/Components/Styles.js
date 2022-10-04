@@ -1,19 +1,23 @@
 
 import { makeStyles } from '@material-ui/core'
 
-const useStyles = makeStyles(theme=>({
+const useStyles = makeStyles({
     
-    sidebar:{
+    mainComponents:{
         display: 'flex',
         flexDirection: 'row',
+    },
+
+    sidebar:{
+        
         position: 'absolute',
-        left: '0',
-        width: '20%',
-        height:'100%',
+        width: '150px',
+        height: '150%',
+        top: '0',
         backgroundColor: '#526722'
     },
     header:{
-        paddingLeft:'20%',
+        paddingLeft:'150px',
         width: '100%'
     },
     appbar: {
@@ -63,6 +67,5 @@ const useStyles = makeStyles(theme=>({
 }
     }
 
-}))
-
+})
 export default useStyles

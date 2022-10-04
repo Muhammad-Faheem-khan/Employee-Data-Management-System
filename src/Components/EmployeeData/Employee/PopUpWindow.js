@@ -10,10 +10,10 @@ const PopUpWindow = ({children, openPopUp, handleWindowClose}) => {
     <Dialog open={openPopUp} maxWidth='md' className={classes.dialogWrapper}>
         <DialogTitle style={{paddingRight: '0px'}} >
             <div style={{display: 'flex'}} >
-            <Typography variant='h6' component='div' style={{flexGrow: 1}}>
-                Employee Form
-            </Typography>
-            <Button variant='contained' onClick={handleWindowClose} className={classes.actionBtndelete}><Close /></Button>
+                <Typography variant='h6' component='div' style={{flexGrow: 1}}>
+                    Employee Form
+                </Typography>
+                <Button variant='contained' onClick={handleWindowClose} className={classes.actionBtndelete}><Close /></Button>
             </div>
         </DialogTitle>
         <DialogContent dividers >
