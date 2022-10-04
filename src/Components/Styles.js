@@ -6,7 +6,8 @@ const useStyles = makeStyles({
     mainComponents:{
         display: 'flex',
         flexDirection: 'row',
-    },
+},
+
 
     sidebar:{
         
@@ -14,11 +15,20 @@ const useStyles = makeStyles({
         width: '150px',
         height: '150%',
         top: '0',
-        backgroundColor: '#526722'
+        backgroundColor: '#526722',
+        // media queries
+        '@media (max-width: 912px)': {
+          width: '0',
+        }
     },
     header:{
         paddingLeft:'150px',
-        width: '100%'
+        width: '100%',
+        // media queries
+        '@media (max-width: 912px)': {
+          paddingLeft: '0',
+          minWidth: '700px'
+        }
     },
     appbar: {
         backgroundColor : '#fff',
@@ -65,7 +75,7 @@ const useStyles = makeStyles({
         position: 'absolute',
         top: '60px',
 }
-    }
+},
 
 })
 export default useStyles
